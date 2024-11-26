@@ -5,6 +5,10 @@ int ft_putstr(char *str)
 	int count;
 	int i;
 
+	if (str == NULL)
+	{
+		return ("NULL");
+	}
 	i = 0;
 	count = 0;
 	while (str[i] != '\0')
