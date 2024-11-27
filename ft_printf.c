@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 11:09:29 by olachhab          #+#    #+#             */
+/*   Updated: 2024/11/27 11:11:07 by olachhab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void free_list(t_format *head)
+void	free_list(t_format *head)
 {
-	t_format *temp;
+	t_format	*temp;
 
 	while (head != NULL)
 	{
@@ -12,7 +24,7 @@ void free_list(t_format *head)
 	}
 }
 
-int process_specifier(char type, va_list args)
+int	process_specifier(char type, va_list args)
 {
 	if (type == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -31,11 +43,11 @@ int process_specifier(char type, va_list args)
 	return (0);
 }
 
-t_format *pass_format(const char *format)
+t_format	*pass_format(const char *format)
 {
-	int i;
-	t_format *node;
-	t_format *head;
+	int			i;
+	t_format	*node;
+	t_format	*head;
 
 	head = NULL;
 	i = 0;
@@ -59,11 +71,11 @@ t_format *pass_format(const char *format)
 	return (head);
 }
 
-int process_format_string(const char *format, va_list args, t_format *head)
+int	process_format_string(const char *format, va_list args, t_format *head)
 {
-	t_format *current;
-	int i;
-	int total_printed;
+	t_format	*current;
+	int			i;
+	int			total_printed;
 
 	if (!format)
 		return (-1);
@@ -88,11 +100,11 @@ int process_format_string(const char *format, va_list args, t_format *head)
 	return (total_printed);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	t_format *head;
-	int total_printed;
+	va_list		args;
+	t_format	*head;
+	int			total_printed;
 
 	if (!format)
 		return (-1);

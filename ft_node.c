@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_node.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 11:09:24 by olachhab          #+#    #+#             */
+/*   Updated: 2024/11/27 11:09:25 by olachhab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-t_format *add_node(t_format **head, t_format *new_node)
+t_format	*add_node(t_format **head, t_format *new_node)
 {
-	t_format *current_node;
+	t_format	*current_node;
 
 	if (!new_node)
 	{
@@ -24,9 +36,9 @@ t_format *add_node(t_format **head, t_format *new_node)
 	return (*head);
 }
 
-t_format *create_node(char type)
+t_format	*create_node(char type)
 {
-	t_format *new_node;
+	t_format	*new_node;
 
 	new_node = (t_format *)malloc(sizeof(t_format));
 	if (!new_node)

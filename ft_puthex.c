@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 11:09:40 by olachhab          #+#    #+#             */
+/*   Updated: 2024/11/27 11:14:07 by olachhab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
- int ft_puthex(unsigned int n, int type)
+int	ft_puthex(unsigned int n, int type)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (n == 0)
