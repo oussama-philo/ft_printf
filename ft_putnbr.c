@@ -6,7 +6,7 @@
 /*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:43 by olachhab          #+#    #+#             */
-/*   Updated: 2024/11/27 11:09:44 by olachhab         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:54:51 by olachhab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 int	ft_putnbr(long nb)
 {
-	int	count;
+	int	printed_chars;
 
-	count = 0;
+	printed_chars = 0;
 	if (nb < 0)
 	{
-		count += ft_putchar('-');
+		printed_chars += ft_putchar('-');
 		nb = -nb;
 	}
 	if (nb >= 10)
 	{
-		count += ft_putnbr(nb / 10);
-		count += ft_putnbr(nb % 10);
+		printed_chars += ft_putnbr(nb / 10);
+		printed_chars += ft_putnbr(nb % 10);
 	}
 	else
-		count += ft_putchar(nb + '0');
-	return (count);
+		printed_chars += ft_putchar(nb + '0');
+	return (printed_chars);
 }

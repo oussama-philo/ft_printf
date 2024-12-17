@@ -6,7 +6,7 @@
 /*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:53 by olachhab          #+#    #+#             */
-/*   Updated: 2024/11/27 11:09:54 by olachhab         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:42:18 by olachhab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_unsigned(unsigned int nb)
 {
-	int					count;
-	unsigned long long	num;
+	int				count;
+	unsigned int	num;
 
 	num = nb;
 	count = 0;

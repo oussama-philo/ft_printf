@@ -6,17 +6,17 @@
 /*   By: olachhab <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:09:29 by olachhab          #+#    #+#             */
-/*   Updated: 2024/11/27 11:11:07 by olachhab         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:07:44 by olachhab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	free_list(t_format *head)
+static void	free_list(t_format *head)
 {
 	t_format	*temp;
 
-	while (head != NULL)
+	while (head)
 	{
 		temp = head;
 		head = head->next;
@@ -24,26 +24,7 @@ void	free_list(t_format *head)
 	}
 }
 
-int	process_specifier(char type, va_list args)
-{
-	if (type == 'c')
-		return (ft_putchar(va_arg(args, int)));
-	else if (type == 's')
-		return (ft_putstr(va_arg(args, char *)));
-	else if (type == 'd' || type == 'i')
-		return (ft_putnbr(va_arg(args, int)));
-	else if (type == 'u')
-		return (ft_unsigned(va_arg(args, unsigned int)));
-	else if (type == 'p')
-		return (ft_addr(va_arg(args, void *)));
-	else if (type == 'x' || type == 'X')
-		return (ft_puthex(va_arg(args, unsigned int), type));
-	else if (type == '%')
-		return (write(1, "%", 1));
-	return (0);
-}
-
-t_format	*pass_format(const char *format)
+static t_format	*pass_format(const char *format)
 {
 	int			i;
 	t_format	*node;
@@ -56,17 +37,17 @@ t_format	*pass_format(const char *format)
 		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
-			if (ft_strchr("cspdixXu%", format[i]))
+			node = create_node();
+			if (!node)
+				return (NULL);
+			parse_flags(format, &i, node);
+			if (parse_type(format, &i, node))
 			{
-				node = create_node(format[i]);
-				if (!node)
-				{
-					return (NULL);
-				}
 				add_node(&head, node);
 			}
 		}
-		i++;
+		else
+			i++;
 	}
 	return (head);
 }
@@ -80,22 +61,22 @@ int	process_format_string(const char *format, va_list args, t_format *head)
 	if (!format)
 		return (-1);
 	current = head;
-	i = 0;
 	total_printed = 0;
+	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (format[i] == '%' && current)
 		{
-			i++;
-			if (current)
-			{
-				total_printed += process_specifier(current->type, args);
-				current = current->next;
-			}
+			total_printed += handle_format_specifier(format, &i,
+					&current, args);
 		}
 		else
+		{
+			if (format[i] == '%' && format[i + 1] == '\0')
+				return (-1);
 			total_printed += write(1, &format[i], 1);
-		i++;
+			i++;
+		}
 	}
 	return (total_printed);
 }
